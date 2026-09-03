@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>★★★ WELCOME TO THE JAKE ARRIVAL ZONE ★★★</title>
+  <style>
+    /* =========================================
+       RETRO 90s / EARLY 2000s GEOCITIES STYLES
+       ========================================= */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000033;
+      background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 20px);
+      background-size: 550px 550px, 350px 350px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      color: #00ff00;
+      font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* RAGING SPONGEBOB MARQUEE BAR */
+    .spongebob-container {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff0000 20px,
+        #ffff00 20px,
+        #ffff00 40px
+      );
+      padding: 6px 0;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.8);
+      border-bottom: 4px ridge #ffffff;
+    }
+
+    .spongetrack {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      animation: spongeRun 8s linear infinite;
+    }
+
+    @keyframes spongeRun {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-150vw); }
+    }
+
+    .rage-text {
+      font-family: "Impact", "Arial Black", sans-serif;
+      font-size: 28px;
+      color: #ffffff;
+      text-shadow: 3px 3px 0 #000, -2px -2px 0 #ff0000, 2px -2px 0 #000, -2px 2px 0 #000;
+      margin: 0 20px;
+      letter-spacing: 2px;
+      animation: textPulse 0.15s infinite alternate;
+    }
+
+    @keyframes textPulse {
+      from { transform: scale(1) rotate(-1deg); color: #fff; }
+      to { transform: scale(1.08) rotate(1deg); color: #ffeb3b; }
+    }
+
+    /* Raging Spongebob Vector Graphic */
+    .sponge-graphic {
+      width: 75px;
+      height: 75px;
+      filter: drop-shadow(0 0 8px red);
+      animation: rageShake 0.08s infinite alternate;
+      flex-shrink: 0;
+    }
+
+    @keyframes rageShake {
+      0% { transform: translate(-3px, 2px) rotate(-4deg); }
+      100% { transform: translate(3px, -2px) rotate(4deg); }
+    }
+
+    /* MAIN CONTENT LAYOUT */
+    .wrapper {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    /* 90s HEADER BANNER */
+    .header-box {
+      border: 5px ridge #ff00ff;
+      background: #000066;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 10px 10px 0px #00ffff;
+      margin-bottom: 25px;
+    }
+
+    h1.glow-text {
+      font-size: 2.3rem;
+      color: #ffff00;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00;
+      margin: 10px 0;
+      text-transform: uppercase;
+      animation: rainbowGlow 1.5s infinite alternate;
+    }
+
+    @keyframes rainbowGlow {
+      0% { text-shadow: 3px 3px #ff0000; color: #ffff00; }
+      50% { text-shadow: -3px 3px #00ff00; color: #00ffff; }
+      100% { text-shadow: 3px -3px #ff00ff; color: #ffffff; }
+    }
+
+    .subtitle {
+      color: #ff99ff;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    /* CLASSIC BLINK EMULATION */
+    .blink {
+      animation: blinker 0.6s linear infinite;
+    }
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+
+    /* WINDOWS 95 STYLE BOXES */
+    .win-box {
+      background: #c0c0c0;
+      color: #000000;
+      border: 4px outset #ffffff;
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+      margin-bottom: 25px;
+    }
+
+    .win-titlebar {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #ffffff;
+      font-family: "MS Sans Serif", Tahoma, sans-serif;
+      font-weight: bold;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .win-controls button {
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      font-weight: bold;
+      line-height: 10px;
+      padding: 0;
+      margin-left: 2px;
+      background: #c0c0c0;
+      border: 2px outset #fff;
+      cursor: pointer;
+    }
+
+    .win-content {
+      padding: 15px;
+      font-family: "Courier New", monospace;
+      font-size: 15px;
+    }
+
+    /* GRID FOR TWO COLUMNS */
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 720px) {
+      .columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* WEATHER BOX SPECIFICS */
+    .weather-readout {
+      background: #000000;
+      color: #00ff66;
+      padding: 12px;
+      border: 3px inset #808080;
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.5;
+    }
+
+    .temp-huge {
+      font-size: 2.2rem;
+      color: #ff3300;
+      font-weight: bold;
+      text-align: center;
+      margin: 8px 0;
+      text-shadow: 0 0 5px red;
+    }
+
+    /* TO-DO LIST */
+    .todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .todo-item {
+      background: #ffffff;
+      border: 2px inset #808080;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .todo-item:hover {
+      background: #ffffcc;
+    }
+
+    .todo-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+    }
+
+    .todo-item.done {
+      background: #d4ffd4;
+      text-decoration: line-through;
+      color: #777;
+    }
+
+    /* CRANK BUTTON */
+    .crank-btn {
+      display: block;
+      width: 100%;
+      background: #ff0055;
+      color: #ffffff;
+      border: 4px outset #ff99cc;
+      font-family: "Impact", sans-serif;
+      font-size: 1.4rem;
+      padding: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 0 10px #ff0055;
+    }
+
+    .crank-btn:active {
+      border: 4px inset #ffffff;
+      transform: translateY(2px);
+    }
+
+    /* HIT COUNTER & FOOTER */
+    .footer {
+      text-align: center;
+      margin: 30px 0;
+      border-top: 3px dashed #ff00ff;
+      padding-top: 15px;
+    }
+
+    .hit-counter {
+      display: inline-block;
+      background: #000;
+      border: 3px inset #808080;
+      padding: 4px 10px;
+      margin: 10px 0;
+    }
+
+    .digit {
+      background: #111;
+      color: #39ff14;
+      font-family: "Courier New", monospace;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 0 5px;
+      border: 1px solid #333;
+    }
+
+    .construction-tape {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffcc00,
+        #ffcc00 15px,
+        #000000 15px,
+        #000000 30px
+      );
+      height: 20px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================= -->
+  <!-- RAGING SPONGEBOB EMERGENCY HEADER TICKER                 -->
+  <!-- ========================================================= -->
+  <div class="spongebob-container">
+    <div class="spongetrack">
+      <!-- Raging Spongebob Custom Retro SVG -->
+      <svg class="sponge-graphic" viewBox="0 0 100 100">
+        <!-- Intense Red Aura -->
+        <circle cx="50" cy="50" r="48" fill="#ff2200" opacity="0.6" />
+        <!-- Sponge Body -->
+        <rect x="20" y="25" width="60" height="50" rx="4" fill="#ffee00" stroke="#000" stroke-width="3" />
+        <!-- Pores -->
+        <circle cx="28" cy="35" r="4" fill="#99aa00" />
+        <circle cx="70" cy="40" r="3" fill="#99aa00" />
+        <circle cx="35" cy="65" r="5" fill="#99aa00" />
+        <!-- Raging Veiny Eyes -->
+        <circle cx="38" cy="40" r="13" fill="#ffffff" stroke="#000" stroke-width="2" />
+        <circle cx="62" cy="40" r="13" fill="#ffffff" stroke="#000" stroke-width="2" />
+        <!-- Bloodshot Veins -->
+        <path d="M 30 35 Q 38 38 32 45" stroke="red" stroke-width="1.5" fill="none" />
+        <path d="M 70 35 Q 62 38 68 45" stroke="red" stroke-width="1.5" fill="none" />
+        <circle cx="41" cy="40" r="5" fill="#ff0000" />
+        <circle cx="59" cy="40" r="5" fill="#ff0000" />
+        <circle cx="41" cy="40" r="2" fill="#000000" />
+        <circle cx="59" cy="40" r="2" fill="#000000" />
+        <!-- Angry Brows -->
+        <line x1="24" y1="28" x2="48" y2="35" stroke="#000" stroke-width="4" stroke-linecap="round" />
+        <line x1="76" y1="28" x2="52" y2="35" stroke="#000" stroke-width="4" stroke-linecap="round" />
+        <!-- Screaming Mouth -->
+        <path d="M 30 55 Q 50 82 70 55 Z" fill="#880000" stroke="#000" stroke-width="2.5" />
+        <!-- Two Front Teeth -->
+        <rect x="42" y="55" width="6" height="7" fill="#fff" stroke="#000" />
+        <rect x="52" y="55" width="6" height="7" fill="#fff" stroke="#000" />
+      </svg>
+
+      <span class="rage-text">🚨 EVERYONE WAKE TF UP, JAKE IS COMING TODAY 🚨</span>
+
+      <!-- Duplicate for chaotic trailing parade -->
+      <svg class="sponge-graphic" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#ff2200" opacity="0.6" />
+        <rect x="20" y="25" width="60" height="50" rx="4" fill="#ffee00" stroke="#000" stroke-width="3" />
+        <circle cx="38" cy="40" r="13" fill="#ffffff" stroke="#000" stroke-width="2" />
+        <circle cx="62" cy="40" r="13" fill="#ffffff" stroke="#000" stroke-width="2" />
+        <circle cx="41" cy="40" r="5" fill="#ff0000" />
+        <circle cx="59" cy="40" r="5" fill="#ff0000" />
+        <line x1="24" y1="28" x2="48" y2="35" stroke="#000" stroke-width="4" />
+        <line x1="76" y1="28" x2="52" y2="35" stroke="#000" stroke-width="4" />
+        <path d="M 30 55 Q 50 82 70 55 Z" fill="#880000" stroke="#000" stroke-width="2.5" />
+        <rect x="42" y="55" width="6" height="7" fill="#fff" stroke="#000" />
+        <rect x="52" y="55" width="6" height="7" fill="#fff" stroke="#000" />
+      </svg>
+
+      <span class="rage-text">🔥 CODE RED: JAKE INBOUND 🔥 EVERYONE WAKE TF UP, JAKE IS COMING TODAY 🔥</span>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    
+    <!-- MAIN HERO BANNER -->
+    <header class="header-box">
+      <marquee scrollamount="12" behavior="alternate" style="color: #ff00ff; font-weight: bold;">
+        ⚡⚡⚡ WELCOME TO JAKE-CON 2000 ⚡⚡⚡
+      </marquee>
+      <h1 class="glow-text">THE OFFICIAL JAKE ARRIVAL HOMEPAGE</h1>
+      <p class="subtitle">
+        <span class="blink">*** WARNING:</span> MAXIMUM CRANK LEVELS DETECTED IN LADERA RANCH <span class="blink">***</span>
+      </p>
+      <div class="construction-tape"></div>
+    </header>
+
+    <div class="columns">
+      
+      <!-- COLUMN 1: LADERA RANCH WEATHER -->
+      <section class="win-box">
+        <div class="win-titlebar">
+          <span>📡 Ladera_Ranch_Live_Weather.exe</span>
+          <div class="win-controls">
+            <button>_</button><button>□</button><button>✕</button>
+          </div>
+        </div>
+        <div class="win-content">
+          <p><strong>TARGET LOCATION:</strong> LADERA RANCH, CA</p>
+          <p><strong>COORDINATES:</strong> 33.5542° N, 117.6425° W</p>
+          
+          <div class="weather-readout" id="weatherDisplay">
+            <div style="text-align: center;">
+              <span class="blink">>>> CONNECTING TO WEATHER SATELLITE... <<<</span>
+            </div>
+          </div>
+
+          <button class="crank-btn" onclick="fetchWeather()">
+            🔄 REFRESH RADAR
+          </button>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: TO-DO / CRANK LIST -->
+      <section class="win-box">
+        <div class="win-titlebar">
+          <span>📝 MISSION_CRANK_OBJECTIVES.txt</span>
+          <div class="win-controls">
+            <button>_</button><button>□</button><button>✕</button>
+          </div>
+        </div>
+        <div class="win-content">
+          <p><strong>STATUS:</strong> JAKE ITINERARY ARMED</p>
+          
+          <ul class="todo-list" id="todoList">
+            <li class="todo-item" onclick="toggleTask(this)">
+              <input type="checkbox" onclick="event.stopPropagation(); toggleTask(this.parentElement)">
+              <span>1. Crank with Jake at the airport</span>
+            </li>
+            <li class="todo-item" onclick="toggleTask(this)">
+              <input type="checkbox" onclick="event.stopPropagation(); toggleTask(this.parentElement)">
+              <span>2. Crank at Disney with Jake</span>
+            </li>
+            <li class="todo-item" onclick="toggleTask(this)">
+              <input type="checkbox" onclick="event.stopPropagation(); toggleTask(this.parentElement)">
+              <span>3. Crank at the beach with jake</span>
+            </li>
+            <li class="todo-item" onclick="toggleTask(this)">
+              <input type="checkbox" onclick="event.stopPropagation(); toggleTask(this.parentElement)">
+              <span>4. crank on ebikes with jake</span>
+            </li>
+          </ul>
+
+          <button class="crank-btn" onclick="megaCrank()">
+            🔊 ACTIVATE MEGA CRANK
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RETRO GUESTBOOK & FOOTER -->
+    <footer class="footer">
+      <div class="construction-tape"></div>
+      
+      <p style="color: yellow; font-weight: bold;">
+        YOU ARE VISITOR NUMBER:
+      </p>
+      <div class="hit-counter">
+        <span class="digit">0</span>
+        <span class="digit">0</span>
+        <span class="digit">6</span>
+        <span class="digit">9</span>
+        <span class="digit">4</span>
+        <span class="digit">2</span>
+        <span class="digit">0</span>
+      </div>
+
+      <p style="font-size: 12px; color: #aaa; margin-top: 15px;">
+        BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 OR INTERNET EXPLORER 5.0 AT 800x600 RESOLUTION.<br />
+        POWERED BY HTML, JS, AND PURE ADRENALINE. MADE FOR JAKE.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- RETRO AUDIO SYNTHESIS & REAL WEATHER SCRIPTS              -->
+  <!-- ========================================================= -->
+  <script>
+    // 1. Web Audio API 8-bit Sound Generator (No external audio files required)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function play8BitSound(freq, duration, type = "sawtooth") {
+      try {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.log("Audio not allowed yet by user interaction");
+      }
+    }
+
+    // Toggle Task and trigger sound
+    function toggleTask(item) {
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (event && event.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+      }
+
+      if (checkbox.checked) {
+        item.classList.add('done');
+        // Retro happy beep
+        play8BitSound(587.33, 0.1);
+        setTimeout(() => play8BitSound(880, 0.2), 100);
+      } else {
+        item.classList.remove('done');
+        // Uncheck boop
+        play8BitSound(250, 0.15, "square");
+      }
+    }
+
+    // Mega Crank siren blast
+    function megaCrank() {
+      alert("🚨 CRANK PROTOCOL ENGAGED: WAKE UP LADERA RANCH 🚨");
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          play8BitSound(400 + (i * 120), 0.15, "sawtooth");
+        }, i * 120);
+      }
+    }
+
+    // 2. Ladera Ranch Real-Time Weather via Open-Meteo API
+    // Ladera Ranch coordinates: 33.5542 N, 117.6425 W
+    async function fetchWeather() {
+      const display = document.getElementById("weatherDisplay");
+      display.innerHTML = '<div style="text-align:center;"><span class="blink">DIALING SATELLITE...</span></div>';
+
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=33.5542&longitude=-117.6425&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FLos_Angeles";
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Connection timed out");
+        const data = await res.json();
+        
+        const temp = Math.round(data.current.temperature_2m);
+        const feelsLike = Math.round(data.current.apparent_temperature);
+        const wind = data.current.wind_speed_10m;
+        const humidity = data.current.relative_humidity_2m;
+        const code = data.current.weather_code;
+
+        // Interpret WMO weather codes
+        let condition = "CLEAR & CRANKIN'";
+        if (code >= 1 && code <= 3) condition = "PARTLY CLOUDY";
+        if (code >= 45 && code <= 48) condition = "FOGGY IN THE RANCH";
+        if (code >= 51 && code <= 67) condition = "DRIZZLE / RAIN";
+        if (code >= 80 && code <= 99) condition = "INTENSE STORM SYSTEM";
+
+        display.innerHTML = `
+          <div>>> CONDITIONS IN LADERA RANCH:</div>
+          <div class="temp-huge">${temp}°F</div>
+          <div><strong>SKY STATUS:</strong> ${condition}</div>
+          <div><strong>FEELS LIKE:</strong> ${feelsLike}°F</div>
+          <div><strong>CRANK WIND SPEED:</strong> ${wind} MPH</div>
+          <div><strong>HUMIDITY:</strong> ${humidity}%</div>
+          <div style="margin-top: 8px; color: #ffff00; font-size: 13px;">
+            VERDICT: OPTIMAL WEATHER FOR CRANKING WITH JAKE.
+          </div>
+        `;
+      } catch (err) {
+        display.innerHTML = `
+          <div style="color: #ff3333;">
+            ⚠️ MODEM DISCONNECT: FAILED TO PULL SATELLITE.<br>
+            ESTIMATED LADERA RANCH TEMP: 74°F (ALWAYS SUNNY WHEN JAKE ARRIVES)
+          </div>
+        `;
+      }
+    }
+
+    // Auto-fetch weather on page load
+    window.onload = () => {
+      fetchWeather();
+    };
+  </script>
+</body>
+</html>

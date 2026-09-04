@@ -264,6 +264,108 @@
       transform: translateY(2px);
     }
 
+    /* RADAR / FLIGHT TRACKER STYLES */
+    .flight-box {
+      margin-bottom: 25px;
+    }
+
+    .radar-screen {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #001100;
+      border: 3px inset #33ff33;
+      overflow: hidden;
+      box-shadow: inset 0 0 25px rgba(0, 255, 0, 0.4);
+      margin: 12px 0;
+    }
+
+    /* Radar scanline & grid */
+    .radar-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .radar-sweep {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, rgba(0, 255, 0, 0.35) 0deg, rgba(0, 255, 0, 0.1) 45deg, transparent 90deg);
+      border-radius: 50%;
+      animation: radarRotate 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes radarRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flight-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .stat-card {
+      background: #000;
+      border: 2px inset #555;
+      padding: 6px 10px;
+      color: #00ff66;
+      font-size: 12px;
+    }
+
+    .stat-card .label {
+      color: #aaa;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .stat-card .val {
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffff00;
+      margin-top: 2px;
+    }
+
+    .retro-progress-bar {
+      width: 100%;
+      height: 22px;
+      background: #000;
+      border: 2px inset #808080;
+      padding: 2px;
+      position: relative;
+      margin: 10px 0;
+    }
+
+    .retro-progress-fill {
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        #ff0055,
+        #ff0055 10px,
+        #ffcc00 10px,
+        #ffcc00 20px
+      );
+      width: 0%;
+      transition: width 0.6s ease-in-out;
+    }
+
     /* HIT COUNTER & FOOTER */
     .footer {
       text-align: center;
@@ -439,6 +541,128 @@
 
     </div>
 
+    <!-- ========================================================= -->
+    <!-- FLIGHT TRACKER WINDOW: SOUTHWEST WN3640 (JAKE MISSILE)     -->
+    <!-- ========================================================= -->
+    <section class="win-box flight-box">
+      <div class="win-titlebar">
+        <span>✈️ NORAD_AIR_DEFENSE_RADAR_WN3640.exe [LIVE INTERCEPT]</span>
+        <div class="win-controls">
+          <button>_</button><button>□</button><button>✕</button>
+        </div>
+      </div>
+      <div class="win-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong style="color: #000080; font-size: 1.1rem;">TARGET: SOUTHWEST AIRLINES FLIGHT WN3640 (SWA3640)</strong><br />
+            <span>ROUTE: <strong>SAN JOSE (SJC)</strong> ➔ <strong>ORANGE COUNTY / SANTA ANA (SNA)</strong></span>
+          </div>
+          <div>
+            <span id="flightBadge" style="background: #ff0000; color: #fff; padding: 4px 8px; font-weight: bold; border: 2px outset #fff;">
+              <span class="blink">● INTERCEPT ACTIVE</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div style="margin-top: 15px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: bold;">
+            <span>🛫 SJC (San Jose Intl)</span>
+            <span id="flightPercentText" style="color: #ff0055;">CALCULATING TRAJECTORY...</span>
+            <span>🛬 SNA (John Wayne / Ladera Intercept)</span>
+          </div>
+          <div class="retro-progress-bar">
+            <div class="retro-progress-fill" id="flightProgressBar"></div>
+          </div>
+        </div>
+
+        <!-- Radar CRT Display -->
+        <div class="radar-screen" id="radarContainer">
+          <div class="radar-grid"></div>
+          <div class="radar-sweep"></div>
+          
+          <svg class="radar-svg" viewBox="0 0 800 260" preserveAspectRatio="none">
+            <!-- CA Coastline outline sketch in retro phosphor green -->
+            <path d="M 50 20 Q 180 80 320 120 T 520 180 T 750 240" fill="none" stroke="rgba(0,255,0,0.25)" stroke-width="2" stroke-dasharray="4,4" />
+            
+            <!-- Flight corridor path -->
+            <path id="flightCorridor" d="M 100 50 C 250 80, 480 140, 700 210" fill="none" stroke="#ffff00" stroke-width="2" stroke-dasharray="6,4" opacity="0.6" />
+            
+            <!-- Origin SJC -->
+            <circle cx="100" cy="50" r="5" fill="#00ff66" />
+            <text x="110" y="45" fill="#00ff66" font-size="12" font-family="Courier New" font-weight="bold">SJC [DEP]</text>
+            
+            <!-- Destination SNA -->
+            <circle cx="700" cy="210" r="6" fill="#ff0055" />
+            <circle cx="700" cy="210" r="14" fill="none" stroke="#ff0055" stroke-width="1.5">
+              <animate attributeName="r" values="6;22;6" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <text x="635" y="240" fill="#ff0055" font-size="12" font-family="Courier New" font-weight="bold">SNA [JAKE LZ]</text>
+
+            <!-- Ladera Ranch Marker -->
+            <polygon points="730,225 740,240 720,240" fill="#ffff00" />
+            <text x="710" y="255" fill="#ffff00" font-size="10" font-family="Courier New">LADERA RANCH</text>
+
+            <!-- Animated Plane Target Marker -->
+            <g id="radarAirplane" transform="translate(100, 50)">
+              <!-- Radar blip glow -->
+              <circle cx="0" cy="0" r="12" fill="rgba(255, 255, 0, 0.3)" />
+              <circle cx="0" cy="0" r="4" fill="#ffff00" />
+              <!-- Plane Icon -->
+              <path d="M 0,-8 L 3,-2 L 12,2 L 12,5 L 3,3 L 2,9 L 6,12 L 6,14 L 0,13 L -6,14 L -6,12 L -2,9 L -3,3 L -12,5 L -12,2 L -3,-2 Z" fill="#ffffff" stroke="#ff0000" stroke-width="1" transform="rotate(115)" />
+              <!-- Callout label -->
+              <rect x="12" y="-18" width="90" height="28" fill="#000" stroke="#00ff00" stroke-width="1" opacity="0.85" />
+              <text x="16" y="-6" fill="#00ff00" font-size="10" font-family="Courier New" font-weight="bold">WN3640</text>
+              <text x="16" y="6" fill="#ffff00" font-size="9" font-family="Courier New" id="radarAltSpdText">ALT: 33,000</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="flight-stats-grid">
+          <div class="stat-card">
+            <div class="label">Flight Status</div>
+            <div class="val" id="statStatus">TRACKING</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Aircraft Equipment</div>
+            <div class="val" id="statAircraft">BOEING 737-MAX8</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Tail / Reg</div>
+            <div class="val" id="statTail">N1804U</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Altitude</div>
+            <div class="val" id="statAltitude">34,000 FT</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Airspeed</div>
+            <div class="val" id="statSpeed">482 MPH</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Est. Touchdown</div>
+            <div class="val" id="statETA">--:-- PDT</div>
+          </div>
+        </div>
+
+        <!-- Audio Alert & Actions -->
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button class="crank-btn" style="margin-top: 0; background: #000080; border-color: #6666ff;" onclick="refreshFlightRadar()">
+            📡 PING TRANSPONDER
+          </button>
+          <button class="crank-btn" style="margin-top: 0; background: #cc6600; border-color: #ffaa33;" onclick="soundSonicBoom()">
+            🚀 SONIC BOOM ALERT
+          </button>
+        </div>
+
+        <div style="margin-top: 8px; font-size: 11px; color: #333;">
+          ⚠️ NORAD FLIGHT INTEL NOTE: Jake is travelling at Mach 0.78 directly into Orange County airspace. Prepare welcoming protocols immediately.
+        </div>
+      </div>
+    </section>
+
     <!-- RETRO GUESTBOOK & FOOTER -->
     <footer class="footer">
       <div class="construction-tape"></div>
@@ -567,9 +791,112 @@
       }
     }
 
-    // Auto-fetch weather on page load
+      }
+    }
+
+    // 3. FLIGHT TRACKER WN3640 LOGIC & ANIMATION
+    let flightProgress = 0.65; // 65% on the way
+    let isTracking = true;
+
+    function getBezierPoint(t, p0, p1, p2, p3) {
+      const cX = 3 * (p1.x - p0.x);
+      const bX = 3 * (p2.x - p1.x) - cX;
+      const aX = p3.x - p0.x - cX - bX;
+
+      const cY = 3 * (p1.y - p0.y);
+      const bY = 3 * (p2.y - p1.y) - cY;
+      const aY = p3.y - p0.y - cY - bY;
+
+      const x = (aX * Math.pow(t, 3)) + (bX * Math.pow(t, 2)) + (cX * t) + p0.x;
+      const y = (aY * Math.pow(t, 3)) + (bY * Math.pow(t, 2)) + (cY * t) + p0.y;
+
+      return { x, y };
+    }
+
+    function updateRadarPlane(pct) {
+      const p0 = { x: 100, y: 50 };
+      const p1 = { x: 250, y: 80 };
+      const p2 = { x: 480, y: 140 };
+      const p3 = { x: 700, y: 210 };
+
+      const pos = getBezierPoint(pct, p0, p1, p2, p3);
+      const plane = document.getElementById("radarAirplane");
+      if (plane) {
+        plane.setAttribute("transform", `translate(${pos.x.toFixed(1)}, ${pos.y.toFixed(1)})`);
+      }
+
+      // Calculate altitude curve (takeoff, cruise at 34,000, descent into SNA)
+      let alt;
+      if (pct < 0.25) {
+        alt = Math.round(pct / 0.25 * 34000);
+      } else if (pct < 0.75) {
+        alt = 34000 + Math.floor(Math.sin(Date.now() / 1000) * 150);
+      } else {
+        alt = Math.max(0, Math.round((1 - (pct - 0.75) / 0.25) * 34000));
+      }
+
+      const spd = 480 + Math.floor(Math.sin(Date.now() / 800) * 15);
+      
+      const altElem = document.getElementById("radarAltSpdText");
+      if (altElem) altElem.textContent = `ALT: ${alt.toLocaleString()} FT`;
+
+      const statAlt = document.getElementById("statAltitude");
+      if (statAlt) statAlt.textContent = `${alt.toLocaleString()} FT`;
+
+      const statSpd = document.getElementById("statSpeed");
+      if (statSpd) statSpd.textContent = `${spd} MPH`;
+
+      const bar = document.getElementById("flightProgressBar");
+      if (bar) bar.style.width = `${Math.min(100, Math.round(pct * 100))}%`;
+
+      const pctText = document.getElementById("flightPercentText");
+      if (pctText) {
+        const remainingMiles = Math.round(350 * (1 - pct));
+        pctText.textContent = `IN FLIGHT (${Math.round(pct * 100)}%) - ${remainingMiles} MILES TO JAKE LZ`;
+      }
+    }
+
+    function animateFlightRadar() {
+      // Slow realistic progression
+      flightProgress += 0.0003;
+      if (flightProgress > 1) {
+        flightProgress = 0.05; // Reset loop
+      }
+      updateRadarPlane(flightProgress);
+      requestAnimationFrame(animateFlightRadar);
+    }
+
+    function soundSonicBoom() {
+      play8BitSound(120, 0.4, "sawtooth");
+      setTimeout(() => play8BitSound(70, 0.6, "square"), 100);
+      alert("🚨 SONIC BOOM CONFIRMED: JAKE HAS BROKEN THE SOUND BARRIER OVER BAKERSFIELD 🚨");
+    }
+
+    function refreshFlightRadar() {
+      play8BitSound(950, 0.08, "triangle");
+      setTimeout(() => play8BitSound(1200, 0.1, "sine"), 100);
+      
+      const statEta = document.getElementById("statETA");
+      if (statEta) {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() + Math.round((1 - flightProgress) * 45));
+        statEta.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " PDT";
+      }
+
+      const badge = document.getElementById("flightBadge");
+      if (badge) {
+        badge.innerHTML = '<span class="blink">📡 TRANSPONDER PINGED: 100% LOCK</span>';
+        setTimeout(() => {
+          badge.innerHTML = '<span class="blink">● INTERCEPT ACTIVE</span>';
+        }, 3000);
+      }
+    }
+
+    // Auto-fetch weather & init flight tracker on page load
     window.onload = () => {
       fetchWeather();
+      animateFlightRadar();
+      refreshFlightRadar();
     };
   </script>
 </body>
